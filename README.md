@@ -22,7 +22,7 @@ Timeouts and end-of-quarter decisions add another layer of strategy, particularl
 # Contributing
 We welcome contributions from the football and coding communities! Whether it's adding new features, refining the game logic, or improving the user interface, your input can help enhance the Football Simulator Project. Please submit your pull requests or open issues to discuss potential improvements.
 
-#License
+# License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 The Football Simulator Project is a labor of love for football fans and coding enthusiasts. 
