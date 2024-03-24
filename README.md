@@ -5,6 +5,14 @@ Welcome to the Football Simulator Project!
 This project aims to create a dynamic and interactive simulation of football games, allowing users to experience the thrill of making strategic decisions, executing plays, and leading their team to victory. 
 Built with Python, our simulator focuses on providing a realistic and engaging representation of football matches, complete with all the complexities and excitement of the real game.
 
+# UPDATES 
+Add-ins that will be coming to future versions of the simulation:
+  - Fumbles
+  - Penatlies
+  - Cleaner interface
+  - Individual team statistics
+  - More functionality
+
 # How It Works
 The simulator runs through a console interface, presenting users with options at each step of the game. 
 The current state of the game, including score, time left, down, and distance, is displayed, allowing users to make informed decisions. 
