@@ -1,4 +1,4 @@
-# FOOTBALL----SIMULATOR
+# FOOTBALL SIMULATOR
 Basic football simulator using python and object oriented programming.
 
 Welcome to the Football Simulator Project! 
