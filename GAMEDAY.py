@@ -57,14 +57,22 @@ def simulate_game():
                 scoreboard.scoreboard()
                 game_state.time.two_minute_decision()
                 game_state.time.handle_user_input()
-                exec.execute_play()
+                if game_state.time.isTimeoutCalled:
+                    scoreboard.scoreboard()
+                    game_state.time.isTimeoutCalled = False
+                else:
+                    exec.execute_play()
 
         # Handle the end of the quarter
         if 0 < game_state.time.qtr_len <= 40 and game_state.time.isClockRunning:
             scoreboard.scoreboard()
             game_state.time.quarter_decision()
             game_state.time.handle_user_input()
-            exec.execute_play()
+            if game_state.time.isTimeoutCalled:
+                scoreboard.scoreboard()
+                game_state.time.isTimeoutCalled = False
+            else:
+                exec.execute_play()
 
         if game_state.time.qtr_len <= 0:
             game_state.time.isEndQuarter = True
@@ -75,15 +83,12 @@ def simulate_game():
             game_state.display_stats()
             scoreboard.quarter_score()
             game_state.time.reset_quarter()
-            
-            if game_state.time.quarter == 2:  # Check if it's halftime
-                game_state.time.halftime()  # Perform halftime activities, including quarter change
-                scoreboard.scoreboard()
-                exec.execute_kickoff()
-            else:
-                # For quarters that are not halftime (end of 1st, 3rd, or 4th), reset the quarter as usual.
-                game_state.time.reset_quarter()
             game_state.time.isEndQuarter = False
+            
+        if game_state.time.quarter == 2 and game_state.time.qtr_len <= 0:  # Check if it's halftime
+            game_state.time.halftime()  # Perform halftime activities, including quarter change
+            scoreboard.scoreboard()
+            exec.execute_kickoff()
 
         if game_state.time.quarter > 4:
             SimFunctions.scroll_print("THATS THE END OF THE GAME.")
