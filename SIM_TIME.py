@@ -132,12 +132,6 @@ class Time:
                     pass
 
     def quarter_decision(self):
-        # Check if quarter naturally ends
-        if self.qtr_len <= 0:
-            self.isEndQuarter = True
-            self.reset_quarter()
-            # Optionally, handle end-of-quarter logic here (e.g., switching sides, resetting certain states)
-
         decision = input("TAKE IT TO THE QUARTER? (yes/no): ").strip().lower()
         while decision not in ["yes", "no"]:
             print("Invalid response. Please answer 'yes' or 'no'.")
