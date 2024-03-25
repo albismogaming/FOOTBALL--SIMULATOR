@@ -36,10 +36,6 @@ class Time:
         elif play_choice == 'kickoff':
             self.qtr_len -= self.play_duration(play_choice)
             self.stop_clock()
-        
-        elif not self.isClockRunning or self.isClockRunning and total_time < 120 <= self.qtr_len:
-            if not self.isTwoMinWarning:
-                self.isTwoMinWarning = True
 
     def offensive_tempo(self):
         print(f"""
@@ -61,7 +57,7 @@ class Time:
 
     def play_duration(self, play_choice):
         if play_choice == 'run':
-            return np.random.randint(4, 10)
+            return np.random.randint(40, 50)
         elif play_choice == 'short pass':
             return np.random.randint(4, 10)
         elif play_choice == 'medium pass':
@@ -78,6 +74,8 @@ class Time:
             return 0
         elif play_choice == 'kickoff':
             return 0
+        else:
+            return np.random.randint(4, 10)
 
     def halftime(self):
         if self.quarter == 2 and self.qtr_len <= 0:
@@ -86,7 +84,6 @@ class Time:
                 self.isHalftime = True
                 self.game_state.home_team.timeouts = 3
                 self.game_state.away_team.timeouts = 3
-                self.second_half()
     
     def second_half(self):
         # Explicitly handle transitioning to the third quarter
@@ -119,17 +116,29 @@ class Time:
 
         if decision == "yes":
             self.qtr_len = 120
-            self.two_minute_warning()
+            if not self.isTwoMinWarning:
+                self.two_minute_warning()
+                self.isTwoMinWarning = True
         elif decision == "no":
-            if self.isClockRunning and self.qtr_len < 135:
+            total_time = self.play_duration(play_choice=any) + self.offensive_tempo()
+            # If total time usage would cross into the two-minute warning threshold
+            if self.qtr_len - total_time <= 120 and not self.isTwoMinWarning:
+                self.qtr_len = 120
+                self.two_minute_warning()
+            elif self.isClockRunning and self.qtr_len > 120:
+                # Proceed with the play if it doesn't cross into or is already within the two-minute threshold
+                self.qtr_len -= total_time
+                # Execute the play logic here
+            elif self.isClockRunning and self.qtr_len <= 135:
                 chance_of_delay = np.random.rand()
-                if chance_of_delay < 0.3:
+                if chance_of_delay < 0.7:
                     SimFunctions.scroll_print(f"{self.game_state.possession} DIDN'T GET THE PLAY OFF IN TIME.")
                     self.qtr_len = max(120, self.qtr_len - 15)
-                    self.two_minute_warning()
+                    if not self.isTwoMinWarning:
+                        self.two_minute_warning()
                 else:
-                    # Select a random play choice properly before decrementing `self.qtr_len`
-                    pass
+                    self.qtr_len -= total_time
+                    # Place logic here to execute the play
 
     def quarter_decision(self):
         decision = input("TAKE IT TO THE QUARTER? (yes/no): ").strip().lower()
@@ -143,7 +152,7 @@ class Time:
         elif decision == "no":
             if self.isClockRunning and self.qtr_len < 15:
                 chance_of_delay = np.random.rand()
-                if chance_of_delay < 0.3:  # Example probability
+                if chance_of_delay < 0.7:  # Example probability
                     SimFunctions.scroll_print(f"{self.game_state.possession} DIDN'T GET THE PLAY OFF IN TIME.")
                     self.qtr_len = 0
                     self.isEndQuarter = True
