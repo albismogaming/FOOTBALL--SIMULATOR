@@ -58,7 +58,7 @@ def simulate_game():
                 game_state.time.two_minute_decision()
 
         # Handle the end of the quarter
-        if game_state.time.qtr_len <= 40 and game_state.time.isClockRunning:
+        if 0 < game_state.time.qtr_len <= 40 and game_state.time.isClockRunning:
             scoreboard.scoreboard()
             game_state.time.quarter_decision()
         elif game_state.time.qtr_len <= 0:
