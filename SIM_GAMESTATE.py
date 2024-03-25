@@ -188,7 +188,6 @@ class GameState:
             elif play_choice == 'extra point' and sptm_result == "NO GOOD":
                 self.display_drive_summary()
                 self.reset_drive_summary()
-                self.change_possession()
                 self.yardline = 35
                 self.time.stop_clock()
             elif play_choice == 'extra point' and sptm_result == "GOOD":
