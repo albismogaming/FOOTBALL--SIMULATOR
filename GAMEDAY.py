@@ -50,7 +50,7 @@ def simulate_game():
 
         # Handle the two-minute warning
         if (game_state.time.quarter == 2 or game_state.time.quarter == 4):
-            if game_state.time.qtr_len <= 120:
+            if game_state.time.qtr_len <= 120 and not game_state.time.isTwoMinWarning:
                 scoreboard.scoreboard()
                 game_state.time.two_minute_warning()
             elif game_state.time.isClockRunning and 120 < game_state.time.qtr_len <= 160:
