@@ -129,14 +129,13 @@ class Time:
                     self.two_minute_warning()
                 else:
                     # Select a random play choice properly before decrementing `self.qtr_len`
-                    play_choice = SimFunctions.play_choice()
-                    self.exec.execute_play()
-                    self.qtr_len -= self.play_duration(play_choice=play_choice)
+                    pass
 
     def quarter_decision(self):
         # Check if quarter naturally ends
         if self.qtr_len <= 0:
             self.isEndQuarter = True
+            self.reset_quarter()
             # Optionally, handle end-of-quarter logic here (e.g., switching sides, resetting certain states)
 
         decision = input("TAKE IT TO THE QUARTER? (yes/no): ").strip().lower()
@@ -154,11 +153,10 @@ class Time:
                     SimFunctions.scroll_print(f"{self.game_state.possession} DIDN'T GET THE PLAY OFF IN TIME.")
                     self.qtr_len = 0
                     self.isEndQuarter = True
+                    self.reset_quarter()
                 else:
                     # Assuming the existence of a method to execute the last play of the quarter
-                    play_choice = SimFunctions.play_choice()
-                    self.exec.execute_play()
-                    self.qtr_len -= self.play_duration(play_choice=play_choice)
+                    pass
 
     def two_minute_warning(self):
         SimFunctions.scroll_print("---  TWO MINUTE WARNING  ---")
