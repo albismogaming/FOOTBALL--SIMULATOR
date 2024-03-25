@@ -56,13 +56,19 @@ def simulate_game():
             elif game_state.time.isClockRunning and 120 < game_state.time.qtr_len <= 160:
                 scoreboard.scoreboard()
                 game_state.time.two_minute_decision()
+                game_state.time.handle_user_input()
+                exec.execute_play()
 
         # Handle the end of the quarter
         if 0 < game_state.time.qtr_len <= 40 and game_state.time.isClockRunning:
             scoreboard.scoreboard()
             game_state.time.quarter_decision()
-        elif game_state.time.qtr_len <= 0:
+            game_state.time.handle_user_input()
+            exec.execute_play()
+
+        if game_state.time.qtr_len <= 0:
             game_state.time.isEndQuarter = True
+            game_state.time.reset_quarter()
 
         if game_state.time.isEndQuarter:
             game_state.time.qtr_len = 0
