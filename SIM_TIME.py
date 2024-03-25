@@ -112,10 +112,6 @@ class Time:
         self.isClockRunning = True
 
     def two_minute_decision(self):
-        # Check if the quarter naturally ends
-        if self.qtr_len <= 120:
-            self.isTwoMinWarning = True
-
         decision = input("TAKE IT TO THE TWO MINUTE? (yes/no): ").strip().lower()
         while decision not in ["yes", "no"]:
             print("Invalid response. Please answer 'yes' or 'no'.")
