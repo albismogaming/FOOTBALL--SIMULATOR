@@ -56,12 +56,16 @@ def simulate_game():
             elif game_state.time.isClockRunning and 120 < game_state.time.qtr_len <= 160:
                 scoreboard.scoreboard()
                 game_state.time.two_minute_decision()
-                game_state.time.handle_user_input()
-                if game_state.time.isTimeoutCalled:
+                if game_state.time.isTwoMinWarning:
                     scoreboard.scoreboard()
-                    game_state.time.isTimeoutCalled = False
+                    game_state.time.two_minute_warning()
                 else:
-                    exec.execute_play()
+                    game_state.time.handle_user_input()
+                    if game_state.time.isTimeoutCalled:
+                        scoreboard.scoreboard()
+                        game_state.time.isTimeoutCalled = False
+                    else:
+                        exec.execute_play()
 
         # Handle the end of the quarter
         if 0 < game_state.time.qtr_len <= 40 and game_state.time.isClockRunning:
@@ -85,10 +89,11 @@ def simulate_game():
             game_state.time.reset_quarter()
             game_state.time.isEndQuarter = False
             
-        if game_state.time.quarter == 2 and game_state.time.qtr_len <= 0:  # Check if it's halftime
-            game_state.time.halftime()  # Perform halftime activities, including quarter change
-            scoreboard.scoreboard()
-            exec.execute_kickoff()
+            if game_state.time.quarter == 2 and game_state.time.qtr_len <= 0: # Check if it's halftime
+                game_state.time.halftime()  # Perform halftime activities, including quarter change
+                game_state.time.second_half()
+                scoreboard.scoreboard()
+                exec.execute_kickoff()
 
         if game_state.time.quarter > 4:
             SimFunctions.scroll_print("THATS THE END OF THE GAME.")
