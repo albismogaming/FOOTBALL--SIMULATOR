@@ -7,6 +7,7 @@ Built with Python, our simulator focuses on providing a realistic and engaging r
 
 # UPDATES 
 This is an on going project that will be continously updated, fixing bugs, gameplay issues, and adding in new features.
+
 Add-ins that will be coming to future versions of the simulation:
   - Fumbles
   - Penatlies
