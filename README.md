@@ -6,7 +6,7 @@ This project aims to create a dynamic and interactive simulation of football gam
 Built with Python, our simulator focuses on providing a realistic and engaging representation of football matches, complete with all the complexities and excitement of the real game.
 
 # UPDATES 
-This is an on going project that will be continued to be updated, fixing bugs, gameplay issues, and new features.
+This is an on going project that will be continously updated, fixing bugs, gameplay issues, and adding in new features.
 Add-ins that will be coming to future versions of the simulation:
   - Fumbles
   - Penatlies
