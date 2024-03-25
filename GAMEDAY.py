@@ -68,13 +68,13 @@ def simulate_game():
 
         if game_state.time.qtr_len <= 0:
             game_state.time.isEndQuarter = True
-            game_state.time.reset_quarter()
 
         if game_state.time.isEndQuarter:
             game_state.time.qtr_len = 0
             scoreboard.scoreboard()
             game_state.display_stats()
             scoreboard.quarter_score()
+            game_state.time.reset_quarter()
             
             if game_state.time.quarter == 2:  # Check if it's halftime
                 game_state.time.halftime()  # Perform halftime activities, including quarter change
