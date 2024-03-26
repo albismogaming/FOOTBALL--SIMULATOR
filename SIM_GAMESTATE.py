@@ -288,5 +288,3 @@ class GameState:
  PLAYS   YARDS   TIME                
   {plays:2}     {yards:2}     {times:4} 
 {colored(f'======================', 'white', attrs=['bold'])}""")
-
-
