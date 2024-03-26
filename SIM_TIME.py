@@ -149,6 +149,7 @@ class Time:
         if decision == "yes":
             self.qtr_len = 0
             self.isEndQuarter = True
+            self.reset_quarter()
         elif decision == "no":
             if self.isClockRunning and self.qtr_len < 15:
                 chance_of_delay = np.random.rand()
