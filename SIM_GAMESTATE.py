@@ -253,7 +253,6 @@ class GameState:
         self.boxscore.update_score(defensive_team, 2, self.time.quarter)
         SimFunctions.scroll_print(f"{defensive_team} SAFETY!!!!")
         # Change possession to the defensive team (which just scored)
-        self.change_possession()
 
     def display_stats(self):
         home_pass_att = (self.home_comps + self.home_incomps)
